@@ -254,6 +254,249 @@
   /* Reveal */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
   .reveal.in{opacity:1;transform:none}
+
+  /* Interactive Projects & Case Studies Area */
+  .proj-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .proj:hover .proj-actions {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .proj-action-btn {
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .proj-action-btn.view-btn {
+    background: rgba(10, 7, 8, 0.75);
+    color: #fff;
+  }
+  .proj-action-btn.view-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+  }
+  .proj-action-btn.open-btn {
+    background: var(--grad);
+    color: #fff;
+    border: none;
+  }
+  .proj-action-btn.open-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(255, 46, 99, 0.6);
+  }
+  @media(max-width: 768px) {
+    .proj-actions {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      top: 12px;
+      right: 12px;
+    }
+    .proj-action-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+  }
+  .proj-click-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent-3);
+    font-weight: 600;
+    margin-top: 10px;
+    opacity: 0.85;
+    transition: gap 0.25s ease, opacity 0.25s ease;
+  }
+  .proj:hover .proj-click-hint {
+    opacity: 1;
+    gap: 10px;
+  }
+  .proj-click-hint .arrow {
+    transition: transform 0.25s ease;
+  }
+  .proj:hover .proj-click-hint .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Lightbox Modal */
+  .proj-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10, 7, 8, 0.88);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .proj-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .proj-modal {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 106, 61, 0.15);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .proj-modal-overlay.active .proj-modal {
+    transform: scale(1) translateY(0);
+  }
+  .proj-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .proj-modal-title-area .cat {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-3);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .proj-modal-title-area h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+  .proj-modal-close {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .proj-modal-close:hover {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+  .proj-modal-body {
+    padding: 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .proj-modal-img-wrap {
+    width: 100%;
+    max-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .proj-modal-img-wrap img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+  }
+  .proj-modal-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+  .proj-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 28px;
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    flex-wrap: wrap;
+  }
+  .proj-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: none;
+    outline: none;
+  }
+  .proj-btn.primary {
+    background: var(--grad);
+    color: #fff;
+    box-shadow: 0 10px 25px -10px rgba(255, 46, 99, 0.5);
+  }
+  .proj-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -10px rgba(255, 46, 99, 0.7);
+  }
+  .proj-btn.secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: #fff;
+  }
+  .proj-btn.secondary:hover {
+    background: var(--surface-2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
 </style>
 </head>
 <body>
@@ -543,6 +786,127 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Interactive Projects & Case Studies Modal and Direct View
+  const modalOverlay = document.createElement('div');
+  modalOverlay.className = 'proj-modal-overlay';
+  modalOverlay.innerHTML = `
+    <div class="proj-modal">
+      <div class="proj-modal-header">
+        <div class="proj-modal-title-area">
+          <div class="cat" id="modalCat"></div>
+          <h3 id="modalTitle"></h3>
+        </div>
+        <button class="proj-modal-close" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      </div>
+      <div class="proj-modal-body">
+        <div class="proj-modal-img-wrap">
+          <img id="modalImg" src="" alt="Project Preview" />
+        </div>
+        <div class="proj-modal-desc" id="modalDesc"></div>
+      </div>
+      <div class="proj-modal-footer">
+        <button class="proj-btn primary" id="modalOpenOrigBtn">↗ Open Original File (New Tab)</button>
+        <button class="proj-btn secondary" id="modalCloseFooterBtn">Close</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modalOverlay);
+
+  const modalImg = document.getElementById('modalImg');
+  const modalCat = document.getElementById('modalCat');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalOpenOrigBtn = document.getElementById('modalOpenOrigBtn');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalCloseFooterBtn = document.getElementById('modalCloseFooterBtn');
+
+  let currentBlobUrl = null;
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalCloseFooterBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+  });
+
+  const blobUrlMap = new WeakMap();
+
+  document.querySelectorAll('.proj').forEach((proj) => {
+    const img = proj.querySelector('img');
+    const cat = proj.querySelector('.cat')?.textContent || 'Project';
+    const title = proj.querySelector('h3')?.textContent || 'Case Study';
+    const desc = proj.querySelector('p')?.textContent || '';
+    const meta = proj.querySelector('.meta');
+
+    if (img && img.src) {
+      if (img.src.startsWith('data:')) {
+        fetch(img.src)
+          .then(res => res.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            blobUrlMap.set(proj, url);
+          })
+          .catch(() => blobUrlMap.set(proj, img.src));
+      } else {
+        blobUrlMap.set(proj, img.src);
+      }
+    }
+
+    if (meta) {
+      const hint = document.createElement('div');
+      hint.className = 'proj-click-hint';
+      hint.innerHTML = '<span>Click to open project & case study</span> <span class="arrow">→</span>';
+      meta.appendChild(hint);
+    }
+
+    const actions = document.createElement('div');
+    actions.className = 'proj-actions';
+    actions.innerHTML = `
+      <button class="proj-action-btn view-btn" title="View Case Study">🔍 View Project</button>
+      <button class="proj-action-btn open-btn" title="Open Original File">↗ Open Original</button>
+    `;
+    proj.appendChild(actions);
+
+    const openOrig = (e) => {
+      if (e) e.stopPropagation();
+      const url = blobUrlMap.get(proj) || (img ? img.src : '');
+      if (url) window.open(url, '_blank');
+    };
+
+    const openModal = (e) => {
+      if (e) e.stopPropagation();
+      const url = blobUrlMap.get(proj) || (img ? img.src : '');
+      currentBlobUrl = url;
+      if (img) modalImg.src = img.src;
+      modalCat.textContent = cat;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const viewBtn = actions.querySelector('.view-btn');
+    const openBtn = actions.querySelector('.open-btn');
+    if (viewBtn) viewBtn.addEventListener('click', openModal);
+    if (openBtn) openBtn.addEventListener('click', openOrig);
+
+    proj.addEventListener('click', openModal);
+  });
+
+  modalOpenOrigBtn.addEventListener('click', () => {
+    if (currentBlobUrl) {
+      window.open(currentBlobUrl, '_blank');
+    }
+  });
 </script>
 </body>
 </html>
